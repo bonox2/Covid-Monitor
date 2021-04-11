@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/style.css" />
+    <title>Covid Monitoring</title>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Covid Monitoring</h1>
+      <div class="dashboard" id="dashboard">
+        <div class="dashboard-tabs"></div>
+        <div class="dashboard-summary"></div>
+        <div class="dashboard-search"></div>
+        <table class="dashboard-content" id="dashboardContent">
+          <thead>
+            <th>Country</th>
+            <th>Confirmed</th>
+            <th>Deaths</th>
+            <th>Recovered</th>
+            <th>Existing</th>
+          </thead>
+          <tbody>
+            <tr>
+              <td>usa</td>
+              <td class="existing">
+                <div>confirmed</div>
+                <div>confirmed delta</div>
+              </td>
+              <td class="recovered">
+                <div>death</div>
+                <div>death delta</div>
+              </td>
+              <td class="deaths">
+                <div>recover</div>
+                <div>recover delta</div>
+              </td>
+              <td class="confirmed">
+                <div>exist</div>
+                <div>exist delta</div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <script src="app.js"></script>
+  </body>
+</html>
