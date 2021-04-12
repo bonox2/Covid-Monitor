@@ -5,6 +5,7 @@ getCovidData(`https://api-covid19.rnbo.gov.ua/data?to=${today}`)
 
 
 
+
 async function getCovidData(url) {
     try {
         const response = await fetch(url)
@@ -16,39 +17,63 @@ async function getCovidData(url) {
 }
 
 function addMessages(elem, messages) {
-    allCountEl.textContent = messages.length//не прочитаные и посчитаные сообщения равны длинне масива
-    const unreadMessages = messages.filter(message => !message.seen)
-    unreadCountEl.textContent = unreadMessages.length//не прочитаные и посчитаные сообщения равны длинне длинне нового чегото
-
-    elem.innerHTML = ''
-    
-     messages.sort((a,b) => {
-         return a.seen - b.seen || b.date - a.date//??
-     })
-
     let messagesHtml = '' //переменная равна строке
     messages.forEach(message => {//функцыя для каждого елемента
         messagesHtml += renderMessage(message)//messagesHtml добавляем renderMessage
     });
     elem.innerHTML = messagesHtml//приравниваем
 }
-
+/*{
+"id": 32893,
+"label": {
+"en": "Kazakhstan",
+"uk": "Казахстан"
+},
+"country": "Kazakhstan",
+"confirmed": 307676,
+"deaths": 3249,
+"recovered": 275505,
+"existing": 28922,
+"suspicion": 0,
+"lat": 48.0196,
+"lng": 66.9237,
+"delta_confirmed": 1816,
+"delta_deaths": 7,
+"delta_recovered": 1293,
+"delta_existing": 516,
+"delta_suspicion": 0
+},*/
 function renderMessage(data) {//каркас секции
     const html =
-        `<div class="letter-section ${data.seen ? 'seen' : 'not_seen'}" data-id="${data.id}">
-            <div class="sender-info">
-                <div class="senders-photo"><img width="50" height="50" loading="lazy" src="${data.avatar}" alt="${data.name}"></div>
-                <div>
-                    <div class="sender-name">${data.name}</div>
-                    <div class="sender-number">${data.phone}</div>
-                </div>
-            </div>
-            <div class="message-info"> ${data.text}</div>
-            <div class="date-time">
-                <div class="time">${timeFormat.format(data.date)}</div>
-                <div class="time">${dateFormat.format(data.date)}</div>
-            </div>
-        </div>
-    </div>`
+        `<table class="dashboard-content" id="dashboardContent">
+        <thead>
+          <th>${data.country}</th>
+          <th>${data.confirmed}</th>
+          <th>${data.Deaths}</th>
+          <th>${data.Recovered}</th>
+          <th>${data.Existing}</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>usa</td>
+            <td class="confirmed">
+              <div>confirmed</div>
+              <div>confirmed delta</div>
+            </td>
+            <td class="deaths">
+              <div>death</div>
+              <div>death delta</div>
+            </td>
+            <td class="recovered">
+              <div>recover</div>
+              <div>recover delta</div>
+            </td>
+            <td class="existing">
+              <div>exist</div>
+              <div>exist delta</div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     return html//возвращаем результат
 }
