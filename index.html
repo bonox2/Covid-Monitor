@@ -12,8 +12,12 @@
       <h1>Covid Monitoring</h1>
       <div class="dashboard" id="dashboard">
         <div class="dashboard-tabs"></div>
-        <div class="dashboard-summary"></div>
-        <div class="dashboard-search"></div>
+        <div class="dashboard-summary" id="dashboardSummary">
+          
+        </div>
+        <div class="dashboard-search">
+          <input class="dashboard-search-input" type="search" name="dashboardSearch" id="dashboardSearch" placeholder="Search">
+        </div>
         <table class="dashboard-content" id="dashboardContent">
           <thead>
             <th>Country</th>
@@ -23,25 +27,7 @@
             <th>Existing</th>
           </thead>
           <tbody>
-            <tr>
-              <td>usa</td>
-              <td class="confirmed">
-                <div>confirmed</div>
-                <div>confirmed delta</div>
-              </td>
-              <td class="deaths">
-                <div>death</div>
-                <div>death delta</div>
-              </td>
-              <td class="recovered">
-                <div>recover</div>
-                <div>recover delta</div>
-              </td>
-              <td class="existing">
-                <div>exist</div>
-                <div>exist delta</div>
-              </td>
-            </tr>
+            
           </tbody>
         </table>
       </div>
