@@ -35,11 +35,30 @@ async function getCovidData(url) {
     console.warn('Fetch error!', error);
   }
 }
-
-
-
-
+// {
+//   "id": 105,
+//   "label": {
+//   "en": "Vinnytsia",
+//   "uk": "Вінницька область"
+//   },
+//   "country": 4907,
+//   "confirmed": 60453,
+//   "deaths": 1176,
+//   "recovered": 38148,
+//   "existing": 21129,
+//   "suspicion": 59638,
+//   "lat": 48.920517,
+//   "lng": 28.685484,
+//   "delta_confirmed": 446,
+//   "delta_deaths": 17,
+//   "delta_recovered": 755,
+//   "delta_existing": -326,
+//   "delta_suspicion": 0
 function renderTableData(elem, covidData) {
+    elem.innerHTML = ''
+    covidData.sort((a,b) => {
+         return a.confirmed - b.confirmed
+     })
   let covidDataHtml = '' //переменная равна строке
   covidData.forEach(country => {
     covidDataHtml += createTableRow(country)
