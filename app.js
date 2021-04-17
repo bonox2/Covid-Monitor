@@ -7,6 +7,7 @@ const dashboardTable = document.getElementById('dashboardContent')
 const dashboardSummary = document.getElementById('dashboardSummary')
 const dashboardTableBody = dashboardTable.querySelector('tbody')
 const dashboardSearch = document.getElementById('dashboardSearch')
+const sortSelect = document.getElementById('sort-select')
 
 const numberFormatter = new Intl.NumberFormat()
 
@@ -20,14 +21,12 @@ dashboardSearch.addEventListener('input', event => {
   renderTableData(dashboardTableBody, covidData)
 })
 
-
 async function getCovidData(url) {
   try {
     const response = await fetch(url)
     const data = await response.json()
     DATA = data[dataType]
     covidData = data[dataType]
-    console.log(covidData);
     dashboardSummary.innerHTML = createSummary(covidData)
     renderTableData(dashboardTableBody, covidData)
     
@@ -54,10 +53,30 @@ async function getCovidData(url) {
 //   "delta_recovered": 755,
 //   "delta_existing": -326,
 //   "delta_suspicion": 0
+
+sortSelect.addEventListener('change', event => {
+  let value = event.target.value
+  let [prop, type] = event.target.value.split('-')// ['odo', 'inc']
+  
+  
+  
+  covidData.sort(function (a,b) {
+      if (type == 'dec') {
+          return b[prop] - a[prop]
+      } else if (type == 'inc'){
+          return a[prop] - b[prop]
+      }
+  })
+
+  renderTableData(dashboardTable, data)
+})
+
+renderTableData(dashboardTable, covidData)
+
 function renderTableData(elem, covidData) {
     elem.innerHTML = ''
     covidData.sort((a,b) => {
-         return a.confirmed - b.confirmed
+         return b.confirmed-a.confirmed 
      })
   let covidDataHtml = '' //переменная равна строке
   covidData.forEach(country => {
@@ -164,3 +183,21 @@ function createTableRow(data) {
   return html
 }
 
+
+//sort
+sortSelect.addEventListener('change', event => {
+  let value = event.target.value
+  let [prop, type] = event.target.value.split('-')// ['odo', 'inc']
+  
+  
+  
+  covidData.sort(function (a,b) {
+      if (type == 'dec') {
+          return b[prop] - a[prop]
+      } else if (type == 'inc'){
+          return a[prop] - b[prop]
+      }
+  })
+
+  renderTableData(dashboardTable, covidData)
+})
