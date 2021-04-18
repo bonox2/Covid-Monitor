@@ -7,7 +7,7 @@ const dashboardTable = document.getElementById('dashboardContent')
 const dashboardSummary = document.getElementById('dashboardSummary')
 const dashboardTableBody = dashboardTable.querySelector('tbody')
 const dashboardSearch = document.getElementById('dashboardSearch')
-const sortSelect = document.getElementById('sort-select')
+
 
 const numberFormatter = new Intl.NumberFormat()
 
@@ -29,7 +29,6 @@ async function getCovidData(url) {
     covidData = data[dataType]
     dashboardSummary.innerHTML = createSummary(covidData)
     renderTableData(dashboardTableBody, covidData)
-    
   } catch (error) {
     console.warn('Fetch error!', error);
   }
@@ -54,32 +53,28 @@ async function getCovidData(url) {
 //   "delta_existing": -326,
 //   "delta_suspicion": 0
 
-sortSelect.addEventListener('change', event => {
-  let value = event.target.value
-  let [prop, type] = event.target.value.split('-')// ['odo', 'inc']
-  
-  
-  
-  covidData.sort(function (a,b) {
-      if (type == 'dec') {
-          return b[prop] - a[prop]
-      } else if (type == 'inc'){
-          return a[prop] - b[prop]
-      }
-  })
 
-  renderTableData(dashboardTable, data)
+dashboardTable.addEventListener('click', event => {
+  const thEl = event.target.closest('th')
+  const thEls = dashboardTable.querySelectorAll('th')
+  thEls.forEach(th => th.dataset.sorting = 'false')
+  thEl.dataset.sorting = 'true'
+  const {key, order} = thEl.dataset
+
+  if (typeof covidData?.[0][key] === 'string') {
+    covidData.sort((a,b) => a[key].localeCompare(b[key]) * order)
+  } else{
+    covidData.sort((a,b) => (a[key] - b[key]) * order)
+  }
+  
+  thEl.dataset.order *= -1
+  renderTableData(dashboardTableBody, covidData)
 })
 
-renderTableData(dashboardTable, covidData)
-
-function renderTableData(elem, covidData) {
-    elem.innerHTML = ''
-    covidData.sort((a,b) => {
-         return b.confirmed-a.confirmed 
-     })
+function renderTableData(elem, data) {
+  elem.innerHTML = ''
   let covidDataHtml = '' //переменная равна строке
-  covidData.forEach(country => {
+  data.forEach(country => {
     covidDataHtml += createTableRow(country)
   });
   elem.innerHTML = covidDataHtml//приравниваем
@@ -188,15 +183,15 @@ function createTableRow(data) {
 sortSelect.addEventListener('change', event => {
   let value = event.target.value
   let [prop, type] = event.target.value.split('-')// ['odo', 'inc']
-  
-  
-  
-  covidData.sort(function (a,b) {
-      if (type == 'dec') {
-          return b[prop] - a[prop]
-      } else if (type == 'inc'){
-          return a[prop] - b[prop]
-      }
+
+
+
+  covidData.sort(function (a, b) {
+    if (type == 'dec') {
+      return b[prop] - a[prop]
+    } else if (type == 'inc') {
+      return a[prop] - b[prop]
+    }
   })
 
   renderTableData(dashboardTable, covidData)

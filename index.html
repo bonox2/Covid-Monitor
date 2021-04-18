@@ -18,24 +18,14 @@
         <div class="dashboard-search">
           <input class="dashboard-search-input" type="search" name="dashboardSearch" id="dashboardSearch" placeholder="Search">
         </div>
-        <select id="sort-select" class="sort-select">
-          <option selected disabled>Сортировать...</option>
-          <option value="confirmed-dec">confirmed (по убыв.)</option>
-          <option value="confirmed-inc">confirmed (по возр.)</option>
-          <option value="deaths-dec">deaths (по убыв.)</option>
-          <option value="deaths-inc">deaths (по возр.)</option>
-          <option value="recovered-dec">recovered (по убыв.)</option>
-          <option value="recovered-inc">recovered (по возр.)</option>
-          <option value="existing-dec">existing(по убыв.)</option>
-          <option value="existing-inc">existing (по возр.)</option>
-        </select>
+        
         <table class="dashboard-content" id="dashboardContent">
           <thead>
-            <th>Country</th>
-            <th>Confirmed</th>
-            <th>Deaths</th>
-            <th>Recovered</th>
-            <th>Existing</th>
+            <th data-key="country" data-order="-1" data-sorting="false">Country</th>
+            <th data-key="confirmed" data-order="-1" data-sorting="true">Confirmed</th>
+            <th data-key="deaths" data-order="-1" data-sorting="false">Deaths</th>
+            <th data-key="recovered" data-order="-1" data-sorting="false">Recovered</th>
+            <th data-key="existing" data-order="-1" data-sorting="false">Existing</th>
           </thead>
           <tbody>
             

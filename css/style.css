@@ -108,14 +108,21 @@ h1{
 .dashboard-content{
     width: 100%;
 }
+.dashboard-content th{
+    cursor: pointer;
+    position: relative;
+}
 .dashboard-content th, .dashboard-content td{
-    padding: 15px;
+    padding: 20px;
 }
 .dashboard-content td>:first-child{
     margin-bottom: 5px;
 }
 .dashboard-content tr{
     border-bottom: 1px solid #555;
+}
+.dashboard-content tr:hover{
+    background: rgba(255, 255, 255, 0.05);
 }
 .dashboard-content th:first-child,.dashboard-content td:first-child{
     width: 40%;
@@ -124,4 +131,14 @@ h1{
 .dashboard-content th:not(:first-child),.dashboard-content td:not(:first-child){
     width: 15%;
     text-align: right;
+}
+.dashboard-content th[data-sorting="true"]::after{
+    position: absolute;
+    right: 0;
+}
+.dashboard-content th[data-sorting="true"][data-order="-1"]::after{
+    content: '\25BC';
+}
+.dashboard-content th[data-sorting="true"][data-order="1"]::after{
+    content: '\25B2';
 }
