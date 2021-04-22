@@ -143,20 +143,14 @@ h1{
     content: '\25B2';
 }
 .dashboard-search{
-        display: flex;
-        background-color: #2f3640;
-        width: 180px;
-        border-radius: 40px;
-        padding: 10px;
+    padding: 25px 0;
 }
-.search-btn {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	color: #f0f0f0;
-	width: 40px;
-	height: 40px;
-	border-radius: 50%;
-	background-color: #2f3640;
-	text-decoration: none;
+.dashboard-search-input{
+    width: 100%;
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #2e313a ;
+    background-color: #292b33;
+    color: #c3c8d9;
+    box-shadow: 0 2px 15px rgb(0 0 0 / 4%);
 }
