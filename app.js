@@ -3,15 +3,51 @@ let covidData = []
 let dataType = 'world'
 let lang = 'en'
 const today = new Date().toJSON().split('T')[0]
+
+const dashboardLangs = document.getElementById('dashboardLangs')
+const dashboardTabs = document.getElementById('dashboardTabs')
 const dashboardTable = document.getElementById('dashboardContent')
 const dashboardSummary = document.getElementById('dashboardSummary')
 const dashboardTableBody = dashboardTable.querySelector('tbody')
 const dashboardSearch = document.getElementById('dashboardSearch')
+const firstTh = document.getElementById('firstTh')
 
 
 const numberFormatter = new Intl.NumberFormat()
 
 getCovidData(`https://api-covid19.rnbo.gov.ua/data?to=${today}`)
+
+dashboardLangs.addEventListener('click', event => {
+  const btnEl = event.target.closest('button')
+  if (!btnEl) {
+    return
+  }
+  const l = btnEl.dataset.lang
+  lang = l
+  renderTableData(dashboardTableBody, covidData)
+})
+
+  // ("button").addClass("white")
+  // function myFunction() {
+//   let element = document.getElementById("dashboardLangs");
+//   element.classList.toggle("white");
+// }
+
+dashboardTabs.addEventListener('click', event => {
+  const btnEl = event.target.closest('button')
+  if (!btnEl) {
+    return
+  }
+  const type = btnEl.dataset.type
+  dataType = type
+  if (dataType === 'world') {
+    firstTh.textContent = 'Country'
+  } else if (dataType === 'ukraine'){
+    firstTh.textContent = 'Region'
+  }
+  
+  getCovidData(`https://api-covid19.rnbo.gov.ua/data?to=${today}`)
+})
 
 dashboardSearch.addEventListener('input', event => {
   const query = event.target.value.trim().toLowerCase()
@@ -56,13 +92,15 @@ async function getCovidData(url) {
 
 dashboardTable.addEventListener('click', event => {
   const thEl = event.target.closest('th')
+  if (!thEl) {
+    return
+  }
   const thEls = dashboardTable.querySelectorAll('th')
   thEls.forEach(th => th.dataset.sorting = 'false')
   thEl.dataset.sorting = 'true'
   const {key, order} = thEl.dataset
-
-  if (typeof covidData?.[0][key] === 'string') {
-    covidData.sort((a,b) => a[key].localeCompare(b[key]) * order)
+  if (typeof covidData[0][key] === 'object') {
+    covidData.sort((a,b) => a[key][lang].localeCompare(b[key][lang]) * order)
   } else{
     covidData.sort((a,b) => (a[key] - b[key]) * order)
   }
@@ -177,22 +215,3 @@ function createTableRow(data) {
           `
   return html
 }
-
-
-//sort
-sortSelect.addEventListener('change', event => {
-  let value = event.target.value
-  let [prop, type] = event.target.value.split('-')// ['odo', 'inc']
-
-
-
-  covidData.sort(function (a, b) {
-    if (type == 'dec') {
-      return b[prop] - a[prop]
-    } else if (type == 'inc') {
-      return a[prop] - b[prop]
-    }
-  })
-
-  renderTableData(dashboardTable, covidData)
-})

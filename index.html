@@ -11,7 +11,14 @@
     <div class="container">
       <h1>Covid Monitoring</h1>
       <div class="dashboard" id="dashboard">
-        <div class="dashboard-tabs"></div>
+          <div class="dashboard-tabs style-lang" id="dashboardLangs">
+            <button data-lang="uk">UK</button>
+            <button data-lang="en">EN</button>
+          </div>
+        <div class="dashboard-tabs style-type" id="dashboardTabs">
+          <button data-type="ukraine">Ukraine</button>
+          <button data-type="world">World</button>
+        </div>
         <div class="dashboard-summary" id="dashboardSummary">
         </div>
         <div class="dashboard-search">
@@ -20,7 +27,7 @@
         
         <table class="dashboard-content" id="dashboardContent">
           <thead>
-            <th data-key="country" data-order="-1" data-sorting="false">Country</th>
+            <th data-key="label" data-order="-1" data-sorting="false" id="firstTh">Country</th>
             <th data-key="confirmed" data-order="-1" data-sorting="true">Confirmed</th>
             <th data-key="deaths" data-order="-1" data-sorting="false">Deaths</th>
             <th data-key="recovered" data-order="-1" data-sorting="false">Recovered</th>

@@ -154,3 +154,53 @@ h1{
     color: #c3c8d9;
     box-shadow: 0 2px 15px rgb(0 0 0 / 4%);
 }
+/*  world/uk btns  */
+.style-type{
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    padding-bottom:40px;
+
+}
+.style-type button{
+    width: 48%;
+    border: none;
+    background-color: #292b33;
+    font-size: 24px;
+    color: #fff;
+    transition: .3s;
+    border-radius: 8px;
+}
+.style-type button:hover{
+    cursor: pointer;
+    color: gray;
+}
+
+
+
+
+
+
+
+
+
+/* langs position,style */
+.style-lang{
+position: fixed;
+right: 20px;
+top: 20px;
+}
+.style-lang button{
+    background-color: #24262e;
+    color: dimgray;
+    border: none;
+    font-size: 24px;
+    transition: .3s;
+}
+.style-lang button:hover{
+    cursor: pointer;
+    color:lightgray;
+}
+.white{
+    color: #fafafa;
+}
